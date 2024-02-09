@@ -27,4 +27,11 @@ public class FootballScoreboardTest {
         assertEquals(1, scoreboard.getSummary().get(0).getAwayScore());
     }
 
+    @Test
+    public void testFinishMatch() {
+        scoreboard.startMatch("Nigeria", "Poland");
+        scoreboard.finishMatch("Italy", "England");
+        assertEquals(0, scoreboard.getSummary().size());
+    }
+
 }
