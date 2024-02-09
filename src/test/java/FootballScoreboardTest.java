@@ -99,5 +99,16 @@ public class FootballScoreboardTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
+    @Test
+    public void testUpdateScoreWithNegativeScores() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.startMatch("Nigeria", "Mali");
+            scoreboard.updateScore("Nigeria", "Mali", -1, 1);
+        });
 
+        String expectedMessage = "Scores cannot be negative.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
 }
