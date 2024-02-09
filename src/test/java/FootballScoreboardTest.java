@@ -1,4 +1,3 @@
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import service.FootballScoreboard;
 
@@ -8,21 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FootballScoreboardTest {
 
-    private FootballScoreboard scoreboard;
-
-    @Before
-    public void setUp() {
-        scoreboard = new FootballScoreboard();
-    }
-
     @Test
     public void testStartMatch() {
+        FootballScoreboard scoreboard = new FootballScoreboard();
         scoreboard.startMatch("Nigeria", "Poland");
         assertEquals(1, scoreboard.getSummary().size());
     }
 
     @Test
     public void testUpdateScore() {
+        FootballScoreboard scoreboard = new FootballScoreboard();
         scoreboard.startMatch("Nigeria", "Poland");
         scoreboard.updateScore("France", "Germany", 2, 1);
         assertEquals(2, scoreboard.getSummary().get(0).getHomeScore());
@@ -31,6 +25,7 @@ public class FootballScoreboardTest {
 
     @Test
     public void testFinishMatch() {
+        FootballScoreboard scoreboard = new FootballScoreboard();
         scoreboard.startMatch("Nigeria", "Poland");
         scoreboard.finishMatch("Italy", "England");
         assertEquals(0, scoreboard.getSummary().size());
@@ -38,6 +33,7 @@ public class FootballScoreboardTest {
 
     @Test
     public void testGetSummary() {
+        FootballScoreboard scoreboard = new FootballScoreboard();
         scoreboard.startMatch("Nigeria", "Poland");
         scoreboard.updateScore("India", "England", 1, 2);
         scoreboard.startMatch("Germany", "Italy");
@@ -54,54 +50,59 @@ public class FootballScoreboardTest {
     @Test
     public void testStartMatchWithNullTeams() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            FootballScoreboard scoreboard = new FootballScoreboard();
             scoreboard.startMatch(null, null);
         });
 
         String expectedMessage = "Home team and away team names cannot be null or empty.";
         String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(actualMessage.equals(expectedMessage));
     }
 
     @Test
     public void testStartMatchWithEmptyTeams() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            FootballScoreboard scoreboard = new FootballScoreboard();
             scoreboard.startMatch("", "");
         });
 
         String expectedMessage = "Home team and away team names cannot be null or empty.";
         String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(actualMessage.equals(expectedMessage));
     }
 
     @Test
     public void testUpdateScoreWithInvalidMatch() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            FootballScoreboard scoreboard = new FootballScoreboard();
             scoreboard.updateScore("Romania", "Mali", 2, 1);
         });
 
         String expectedMessage = "No match found between Romania and Mali.";
         String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(actualMessage.equals(expectedMessage));
     }
 
     @Test
     public void testFinishMatchWithInvalidMatch() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            FootballScoreboard scoreboard = new FootballScoreboard();
             scoreboard.finishMatch("Mali", "Turkey");
         });
 
         String expectedMessage = "No match found between Mali and Turkey.";
         String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(actualMessage.equals(expectedMessage));
     }
 
     @Test
     public void testUpdateScoreWithNegativeScores() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            FootballScoreboard scoreboard = new FootballScoreboard();
             scoreboard.startMatch("Nigeria", "Mali");
             scoreboard.updateScore("Nigeria", "Mali", -1, 1);
         });
@@ -109,6 +110,6 @@ public class FootballScoreboardTest {
         String expectedMessage = "Scores cannot be negative.";
         String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.contains(expectedMessage));
+        assertTrue(actualMessage.equals(expectedMessage));
     }
 }
