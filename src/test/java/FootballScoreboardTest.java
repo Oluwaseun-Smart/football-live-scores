@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import service.FootballScoreboard;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FootballScoreboardTest {
 
@@ -48,4 +50,30 @@ public class FootballScoreboardTest {
         assertEquals("France", scoreboard.getSummary().get(2).getHomeTeam());
         assertEquals("USA", scoreboard.getSummary().get(2).getAwayTeam());
     }
+
+    @Test
+    public void testStartMatchWithNullTeams() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.startMatch(null, null);
+        });
+
+        String expectedMessage = "Home team and away team names cannot be null or empty.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testStartMatchWithEmptyTeams() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.startMatch("", "");
+        });
+
+        String expectedMessage = "Home team and away team names cannot be null or empty.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+
 }
