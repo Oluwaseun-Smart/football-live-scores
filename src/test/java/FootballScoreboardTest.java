@@ -87,5 +87,17 @@ public class FootballScoreboardTest {
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
+    @Test
+    public void testFinishMatchWithInvalidMatch() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            scoreboard.finishMatch("Mali", "Turkey");
+        });
+
+        String expectedMessage = "No match found between Mali and Turkey.";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
 
 }
