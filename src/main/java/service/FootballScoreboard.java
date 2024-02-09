@@ -27,11 +27,14 @@ public class FootballScoreboard {
 
     public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
         Match match = findMatch(homeTeam, awayTeam);
-        if (match == null) {
-            throw new IllegalArgumentException("No match found between " + homeTeam + " and " + awayTeam + ".");
-        }
         match.setScore(homeScore, awayScore);
         System.out.println(String.format("Score updated for match between %s and %s.", homeScore, awayScore));
+    }
+
+    public void finishMatch(String homeTeam, String awayTeam) {
+        Match match = findMatch(homeTeam, awayTeam);
+        matches.remove(match);
+        System.out.println("Match between " + homeTeam + " and " + awayTeam + " finished.");
     }
 
     private Match findMatch(String homeTeam, String awayTeam) {
