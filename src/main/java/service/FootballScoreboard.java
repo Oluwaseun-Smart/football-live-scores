@@ -3,6 +3,7 @@ package service;
 import model.Match;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class FootballScoreboard {
@@ -42,5 +43,11 @@ public class FootballScoreboard {
                 .filter(match -> match.getHomeTeam().equals(homeTeam) && match.getAwayTeam().equals(awayTeam))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(String.format("No match found between %s and %s.", homeTeam, awayTeam)));
+    }
+
+    public List<Match> getSummary() {
+        List<Match> sortedMatches = new ArrayList<>(matches);
+        sortedMatches.sort(Comparator.comparing(Match::getTotalScore).reversed().thenComparing(Match::getStartTime));
+        return sortedMatches;
     }
 }
