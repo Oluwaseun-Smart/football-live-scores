@@ -30,13 +30,13 @@ public class FootballScoreboard {
     public void updateScore(String homeTeam, String awayTeam, int homeScore, int awayScore) {
         Match match = findMatch(homeTeam, awayTeam).orElseThrow(() -> new IllegalArgumentException(String.format("No match found between %s and %s.", homeTeam, awayTeam)));
         match.setScore(homeScore, awayScore);
-        System.out.println(String.format("Score updated for match between %s and %s.", homeScore, awayScore));
+        System.out.println(String.format("Score updated for match between %s and %s.", homeTeam, awayTeam));
     }
 
     public void finishMatch(String homeTeam, String awayTeam) {
         Match match = findMatch(homeTeam, awayTeam).orElseThrow(() -> new IllegalArgumentException(String.format("No match found between %s and %s.", homeTeam, awayTeam)));
         matches.remove(match);
-        System.out.println("Match between " + homeTeam + " and " + awayTeam + " finished.");
+        System.out.println(String.format("Match between %s and %s finished.", homeTeam, awayTeam));
     }
 
     private Optional<Match> findMatch(String homeTeam, String awayTeam) {

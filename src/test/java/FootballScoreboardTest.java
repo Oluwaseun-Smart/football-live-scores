@@ -18,7 +18,7 @@ public class FootballScoreboardTest {
     public void testUpdateScore() {
         FootballScoreboard scoreboard = new FootballScoreboard();
         scoreboard.startMatch("Nigeria", "Poland");
-        scoreboard.updateScore("France", "Germany", 2, 1);
+        scoreboard.updateScore("Nigeria", "Poland", 2, 1);
         assertEquals(2, scoreboard.getSummary().get(0).getHomeScore());
         assertEquals(1, scoreboard.getSummary().get(0).getAwayScore());
     }
@@ -27,7 +27,7 @@ public class FootballScoreboardTest {
     public void testFinishMatch() {
         FootballScoreboard scoreboard = new FootballScoreboard();
         scoreboard.startMatch("Nigeria", "Poland");
-        scoreboard.finishMatch("Italy", "England");
+        scoreboard.finishMatch("Nigeria", "Poland");
         assertEquals(0, scoreboard.getSummary().size());
     }
 
@@ -35,14 +35,14 @@ public class FootballScoreboardTest {
     public void testGetSummary() {
         FootballScoreboard scoreboard = new FootballScoreboard();
         scoreboard.startMatch("Nigeria", "Poland");
-        scoreboard.updateScore("India", "England", 1, 2);
+        scoreboard.updateScore("Nigeria", "Poland", 4, 2);
         scoreboard.startMatch("Germany", "Italy");
-        scoreboard.updateScore("Ghana", "South Africa", 2, 2);
+        scoreboard.updateScore("Germany", "Italy", 2, 2);
         scoreboard.startMatch("France", "USA");
-        assertEquals("Germany", scoreboard.getSummary().get(0).getHomeTeam());
-        assertEquals("Italy", scoreboard.getSummary().get(0).getAwayTeam());
-        assertEquals("Nigeria", scoreboard.getSummary().get(1).getHomeTeam());
-        assertEquals("Poland", scoreboard.getSummary().get(1).getAwayTeam());
+        assertEquals("Nigeria", scoreboard.getSummary().get(0).getHomeTeam());
+        assertEquals("Poland", scoreboard.getSummary().get(0).getAwayTeam());
+        assertEquals("Germany", scoreboard.getSummary().get(1).getHomeTeam());
+        assertEquals("Italy", scoreboard.getSummary().get(1).getAwayTeam());
         assertEquals("France", scoreboard.getSummary().get(2).getHomeTeam());
         assertEquals("USA", scoreboard.getSummary().get(2).getAwayTeam());
     }
