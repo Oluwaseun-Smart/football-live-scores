@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-public class Game {
+public class Match {
 
     private String homeTeam;
     private String awayTeam;
@@ -10,7 +10,7 @@ public class Game {
     private int awayScore;
     private Date startTime;
 
-    public Game(String homeTeam, String awayTeam) {
+    public Match(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.homeScore = 0;
